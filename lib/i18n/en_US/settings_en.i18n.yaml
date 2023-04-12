@@ -1,0 +1,13 @@
+title: Settings
+
+general_settings: General
+language: Language
+visual_settings: Visual
+theme_mode: Theme
+system_theme: System
+dark_theme: Dark
+light_theme: Light
+seed_color: Colors
+dynamic_color: Dynamic
+static_color: Static
+static_color_picker: Accent colors
