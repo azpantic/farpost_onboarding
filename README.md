@@ -1,6 +1,6 @@
-# farpost_onboarding
+# Farpost адаптация
 
-A new Flutter project.
+Мобильное приложение farpost для помощи новым сотрудникам.
 
 ## Getting Started
 
