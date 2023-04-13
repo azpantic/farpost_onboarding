@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:flutter_mobile_application_template/i18n/strings.g.dart';
+import 'package:flutter_mobile_application_template/subpages/dialog_page.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends GetView<void> {
   const HomePage({super.key});
@@ -43,7 +45,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(onPressed: () {}, child: Text("Прочитать")),
+              ElevatedButton(
+                  onPressed: () {
+                    context.push('/home/dialog');
+                  },
+                  child: Text("Прочитать")),
               ElevatedButton(onPressed: () {}, child: Text("Пройти тест")),
             ],
           ),

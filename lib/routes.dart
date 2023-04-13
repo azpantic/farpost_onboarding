@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_application_template/subpages/dialog_page.dart';
 import 'package:flutter_mobile_application_template/subpages/settings_subpage.dart';
 
 import 'package:get/get.dart';
@@ -65,7 +66,16 @@ final router = GoRouter(
             key: state.pageKey,
             child: HomePage(),
           ),
-          routes: [],
+          routes: [
+            GoRoute(
+              path: 'dialog',
+              pageBuilder: (context, state) => NoTransitionPage<void>(
+                key: state.pageKey,
+                child: DialogPage(),
+              ),
+              routes: [],
+            ),
+          ],
         ),
         GoRoute(
           path: '/custom',
