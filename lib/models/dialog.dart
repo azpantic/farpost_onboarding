@@ -1,12 +1,22 @@
 class ChatDialog {
   String title = '';
-  int messageIndex = 1;
   List<Message> messages = [];
 
   ChatDialog(this.title, this.messages);
+  static int dialogIndex = 0;
 
-  List<Message> getMessagesList(){
-    return messages.sublist(0, messageIndex);
+  static ChatDialog getCurrentDialog(){
+      // TODO: диалог должен вытягиваться из файла согласно индексу
+    return ChatDialog(
+      'Добро пожаловать',
+      [
+        Message('Привет, я софия', false),
+        Message('Привет, чем занимаетесь', true),
+        Message('Делаем мир лучше', false),
+        Message('Круто', true),
+        Message('Да', false),
+      ],
+    );
   }
 }
 

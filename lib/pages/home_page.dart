@@ -6,6 +6,8 @@ import 'package:flutter_mobile_application_template/subpages/dialog_page.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
+import '../models/dialog.dart';
+
 class HomePage extends GetView<void> {
   const HomePage({super.key});
 
@@ -47,6 +49,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: [
               ElevatedButton(
                   onPressed: () {
+                    ChatDialog.dialogIndex = details.currentStep;
                     context.push('/home/dialog');
                   },
                   child: Text("Прочитать")),
