@@ -1,0 +1,25 @@
+{
+  "title": "Добро пожаловать",
+  "messages": [
+    {
+      "text": "Привет, я софия",
+      "isMine": false
+    },
+    {
+      "text": "Привет, чем занимаетесь",
+      "isMine": true
+    },
+    {
+      "text": "Делаем мир лучше",
+      "isMine": false
+    },
+    {
+      "text": "Круто",
+      "isMine": true
+    },
+    {
+      "text": "Да",
+      "isMine": false
+    }
+  ]
+}

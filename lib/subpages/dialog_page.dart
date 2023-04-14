@@ -10,8 +10,24 @@ class DialogPage extends GetView<DialogController> {
 
   @override
   Widget build(BuildContext context) {
-    ChatDialog dialog = ChatDialog.getCurrentDialog();
+    return FutureBuilder<ChatDialog>(
+        future: ChatDialog.getCurrentDialog(),
+        builder: (context, AsyncSnapshot<ChatDialog> snapshot) {
+          if (snapshot.hasData) {
+            return dialogPage(context, snapshot.requireData);
+          } else if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          } else {
+            return const SizedBox(
+              height: 30,
+              width: 30,
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
+  }
 
+  Widget dialogPage(BuildContext context, ChatDialog dialog) {
     DialogController controller = Get.put(DialogController(dialog));
 
     return Scaffold(
@@ -45,7 +61,8 @@ class DialogPage extends GetView<DialogController> {
                 padding: EdgeInsets.all(10.0),
                 child: Text(
                   'Диалог окончен', // TODO: текст в i18n
-                  style: TextStyle(color: Colors.white38), //TODO: брать цвет из темы
+                  style: TextStyle(
+                      color: Colors.white38), //TODO: брать цвет из темы
                 ),
               ),
           ],

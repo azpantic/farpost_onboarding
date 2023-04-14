@@ -53,7 +53,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     context.push('/home/dialog');
                   },
                   child: Text("Прочитать")),
-              ElevatedButton(onPressed: () {}, child: Text("Пройти тест")),
+              ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Пройти тест")),
             ],
           ),
         );
