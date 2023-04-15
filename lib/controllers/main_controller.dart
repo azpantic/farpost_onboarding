@@ -1,4 +1,4 @@
-import 'package:flutter_mobile_application_template/constans.dart';
+import 'package:flutter_mobile_application_template/constants.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_mobile_application_template/constans.dart';
+import 'package:flutter_mobile_application_template/constants.dart';
 import 'package:get/get.dart';
 
 import 'controllers/main_controller.dart';

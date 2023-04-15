@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_application_template/constans.dart';
+import 'package:flutter_mobile_application_template/constants.dart';
 import 'package:flutter_mobile_application_template/controllers/main_controller.dart';
 import 'package:flutter_mobile_application_template/i18n/strings.g.dart';
 import 'package:get/get.dart';
