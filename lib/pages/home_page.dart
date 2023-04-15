@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:flutter_mobile_application_template/i18n/strings.g.dart';
+import 'package:flutter_mobile_application_template/models/dialog_info.dart';
 import 'package:flutter_mobile_application_template/subpages/dialog_page.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -36,12 +37,26 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  final int dialogAmount =
-      3; // TODO: автоматически считать количество диалогов папке assets/dialogs
   int _index = 0;
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<DialogInfoProvider>(
+      future: DialogInfoProvider.getDialogInfo(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return TitleStepper(context, snapshot.requireData);
+        } else if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        } else {
+          return Text('');
+        }
+      },
+    );
+  }
+
+  Widget TitleStepper(
+      BuildContext context, DialogInfoProvider dialogInfoProvider) {
     return Stepper(
       controlsBuilder: ((context, details) {
         return Padding(
@@ -67,18 +82,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         });
       },
       steps: <Step>[
-        for (int i = 0; i < dialogAmount; i++)
+        for (int i = 0; i < dialogInfoProvider.data.length; i++)
           Step(
             title: Container(
-                decoration: BoxDecoration(
-                  color: Colors.lightGreen,
-                  borderRadius: BorderRadius.circular(appRoundRadius),
-                ),
-                padding: EdgeInsets.all(appPadding),
-                child: Text('Неделя ${i + 1}')),
+              decoration: BoxDecoration(
+                color: Colors.lightGreen,
+                borderRadius: BorderRadius.circular(appRoundRadius),
+              ),
+              padding: EdgeInsets.all(appPadding),
+              child: Text(dialogInfoProvider.data[i].title),
+            ),
             content: Container(
-                alignment: Alignment.centerLeft,
-                child: Text('Подзаголовок ${i + 1}')),
+              alignment: Alignment.centerLeft,
+              child: Text(dialogInfoProvider.data[i].subTitle),
+            ),
           )
       ],
     );
