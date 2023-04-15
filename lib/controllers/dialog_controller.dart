@@ -6,7 +6,7 @@ class DialogController extends GetxController {
     receiveMessages();
   }
 
-  final ChatDialog dialog;
+  ChatDialog dialog;
   RxInt messageIndex = 0.obs;
   RxBool showButton = true.obs;
   RxBool dialogEnded = false.obs;

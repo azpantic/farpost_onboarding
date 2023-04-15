@@ -16,20 +16,23 @@ class DialogPage extends GetView<DialogController> {
           if (snapshot.hasData) {
             return dialogPage(context, snapshot.requireData);
           } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
+            return Scaffold(
+                appBar: AppBar(
+                  title: const Text(
+                    'Error',
+                  ),
+                ),
+                body: Text(snapshot.error.toString()));
           } else {
-            return const SizedBox(
-              height: 30,
-              width: 30,
-              child: CircularProgressIndicator(),
+            return const Scaffold(
+              body: Center(child: Text('')),
             );
           }
         });
   }
 
   Widget dialogPage(BuildContext context, ChatDialog dialog) {
-    DialogController controller = Get.put(DialogController(dialog));
-
+    DialogController controller = DialogController(dialog);
     return Scaffold(
       appBar: AppBar(
         title: Text(dialog.title),

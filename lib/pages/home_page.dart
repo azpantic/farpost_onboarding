@@ -36,6 +36,8 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  final int dialogAmount =
+      3; // TODO: автоматически считать количество диалогов папке assets/dialogs
   int _index = 0;
 
   @override
@@ -53,9 +55,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     context.push('/home/dialog');
                   },
                   child: Text("Прочитать")),
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Пройти тест")),
+              ElevatedButton(onPressed: () {}, child: Text("Пройти тест")),
             ],
           ),
         );
@@ -67,66 +67,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         });
       },
       steps: <Step>[
-        Step(
-          title: Container(
-              decoration: BoxDecoration(
-                color: Colors.lightGreen,
-                borderRadius: BorderRadius.circular(appRoundRadius),
-              ),
-              padding: EdgeInsets.all(appPadding),
-              child: const Text('Первая неделя')),
-          content: Container(
-              alignment: Alignment.centerLeft,
-              child: const Text('Знакомоство с компанпей и её итстоией')),
-        ),
-        Step(
-          title: Container(
-              decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(appRoundRadius),
-              ),
-              padding: EdgeInsets.all(appPadding),
-              child: const Text('Первая неделя')),
-          content: Container(
-              alignment: Alignment.centerLeft,
-              child: const Text('Знакомоство с компанпей и её итстоией')),
-        ),
-        Step(
-          title: Container(
-              decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(appRoundRadius),
-              ),
-              padding: EdgeInsets.all(appPadding),
-              child: const Text('Первая неделя')),
-          content: Container(
-              alignment: Alignment.centerLeft,
-              child: const Text('Знакомоство с компанпей и её итстоией')),
-        ),
-        Step(
-          title: Container(
-              decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(appRoundRadius),
-              ),
-              padding: EdgeInsets.all(appPadding),
-              child: const Text('Первая неделя')),
-          content: Container(
-              alignment: Alignment.centerLeft,
-              child: const Text('Знакомоство с компанпей и её итстоией')),
-        ),
-        Step(
-          title: Container(
-              decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(appRoundRadius),
-              ),
-              padding: EdgeInsets.all(appPadding),
-              child: const Text('Первая неделя')),
-          content: Container(
-              alignment: Alignment.centerLeft,
-              child: const Text('Знакомоство с компанпей и её итстоией')),
-        ),
+        for (int i = 0; i < dialogAmount; i++)
+          Step(
+            title: Container(
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  borderRadius: BorderRadius.circular(appRoundRadius),
+                ),
+                padding: EdgeInsets.all(appPadding),
+                child: Text('Неделя ${i + 1}')),
+            content: Container(
+                alignment: Alignment.centerLeft,
+                child: Text('Подзаголовок ${i + 1}')),
+          )
       ],
     );
   }
