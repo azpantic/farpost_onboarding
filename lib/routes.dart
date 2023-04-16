@@ -68,6 +68,7 @@ final router = GoRouter(
           ),
           routes: [
             GoRoute(
+              parentNavigatorKey: _rootNavigationKey,
               path: 'dialog',
               pageBuilder: (context, state) => NoTransitionPage<void>(
                 key: state.pageKey,
