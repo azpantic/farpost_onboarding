@@ -11,7 +11,7 @@ class ChatDialog {
   ChatDialog({required this.title, required this.messages});
 
   static Future<ChatDialog> getCurrentDialog() async {
-    String json = await rootBundle.loadString('dialogs/$dialogIndex.json');
+    String json = await rootBundle.loadString('assets/dialogs/$dialogIndex.json');
     Map<String, dynamic> dialogJsonMap = jsonDecode(json);
     ChatDialog dialog = ChatDialog.fromJson(dialogJsonMap);
     return dialog;

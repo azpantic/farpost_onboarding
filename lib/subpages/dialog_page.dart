@@ -41,52 +41,44 @@ class DialogPage extends GetView<DialogController> {
 
   Widget dialogPage(BuildContext context, ChatDialog dialog) {
     DialogController controller = DialogController(dialog);
-    controller.setActiveChat(dialogIndex!);
-    controller.onDialogEnd = (int chatIndex) {
-      var stepperController = Get.find<DialogStepperController>();
-      stepperController.seteDialogEnable(dialogIndex! + 1);
-    };
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(dialog.title),
-        backgroundColor: Colors.transparent,
-      ),
-      body: Obx(
-        () => Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: controller.messageIndex.value,
-                itemBuilder: (BuildContext context, int index) {
-                  return MessageWidget(msg: dialog.messages[index]);
-                },
-              ),
-            ),
-            if (controller.messageIndex.value < dialog.messages.length &&
-                controller.showButton.value)
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: ElevatedButton(
-                  onPressed: controller.nextMessage,
-                  child:
-                      Text(dialog.messages[controller.messageIndex.value].text),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(dialog.title),
+          backgroundColor: Colors.transparent,
+        ),
+        body: Obx(
+          () => Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: controller.messageIndex.value,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MessageWidget(msg: dialog.messages[index]);
+                  },
                 ),
               ),
-            if (controller.dialogEnded.value)
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: ElevatedButton(
-                  onPressed: () => context.pop(),
-                  child: Text(
-                    'Завершить диалог', // TODO: текст в i18n
-                    style: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary), //TODO: брать цвет из темы
+              if (controller.messageIndex.value < dialog.messages.length &&
+                  controller.showButton.value)
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: ElevatedButton(
+                    onPressed: controller.nextMessage,
+                    child: Text(
+                        dialog.messages[controller.messageIndex.value].text),
                   ),
                 ),
-              ),
-          ],
+              if (controller.dialogEnded.value)
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Диалог окончен', // TODO: текст в i18n
+                    style: TextStyle(
+                        color: Colors.white38), //TODO: брать цвет из темы
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
