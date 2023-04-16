@@ -7,9 +7,32 @@ class DialogController extends GetxController {
   }
 
   final allChatData = [
-    ChatDialog(title: "Добро пожаловать", messages: [
-      Message("Привет", false),
-    ]),
+    ChatDialog(
+      title: "Добро пожаловать",
+      messages: [
+        Message("Привет", false),
+        Message("Привет", true),
+        Message("Этот диалог - первое знакомство", false),
+        Message("Круто", true),
+        Message("В следующих диалогах мы расскажем больше", false),
+      ],
+    ),
+    ChatDialog(
+      title: "Продолжаем знакомиться",
+      messages: [
+        Message("Вы уже знаете кое-что, но мы расскажем еще", false),
+        Message("Я заинтересован", true),
+        Message("*Дополительная информация*", false),
+      ],
+    ),
+    ChatDialog(
+      title: "Продвинутое знакомство",
+      messages: [
+        Message("Вы знаете уже почти все", false),
+        Message("Да, но мне интересно больше", true),
+        Message("Узнайте больше из наших ресурсов", false),
+      ],
+    ),
   ];
 
   void setActiveChat(int chatIndex) {
