@@ -7,7 +7,7 @@ class DialogInfoProvider {
   DialogInfoProvider({required this.data});
 
   static Future<DialogInfoProvider> getDialogInfo() async {
-    String json = await rootBundle.loadString('dialogs/info.json');
+    String json = await rootBundle.loadString('assets/dialogs/info.json');
     Map<String, dynamic> dialogJsonMap = jsonDecode(json);
     DialogInfoProvider dialog = DialogInfoProvider.fromJson(dialogJsonMap);
     return dialog;

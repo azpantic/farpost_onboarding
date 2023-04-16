@@ -75,9 +75,10 @@ class DialogStepper extends GetView<DialogStepperController> {
             controller.selectedDialogIndex(dialogIndex);
             return;
           }
-
+          
+          Fluttertoast.cancel();
           Fluttertoast.showToast(
-            msg: "This is a short message",
+            msg: "Этот диалог пока недоступен",
             toastLength: Toast.LENGTH_SHORT,
             textColor: Colors.black,
             fontSize: 16,
