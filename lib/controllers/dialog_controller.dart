@@ -6,6 +6,21 @@ class DialogController extends GetxController {
     receiveMessages();
   }
 
+  final allChatData = [
+    ChatDialog(title: "Добро пожаловать", messages: [
+      Message("Привет", false),
+    ]),
+  ];
+
+  void setActiveChat(int chatIndex) {
+    dialog = allChatData[chatIndex];
+    currentChatIndex = chatIndex;
+  }
+
+  late void Function(int) onDialogEnd;
+
+  late final currentChatIndex;
+
   ChatDialog dialog;
   RxInt messageIndex = 0.obs;
   RxBool showButton = true.obs;
@@ -23,9 +38,9 @@ class DialogController extends GetxController {
 
     if (messageIndex.value < dialog.messages.length) {
       showButton.value = true;
-    }
-    else{
+    } else {
       dialogEnded.value = true;
+      onDialogEnd(currentChatIndex);
     }
   }
 

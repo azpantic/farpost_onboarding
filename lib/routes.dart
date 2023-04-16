@@ -69,10 +69,13 @@ final router = GoRouter(
           routes: [
             GoRoute(
               parentNavigatorKey: _rootNavigationKey,
-              path: 'dialog',
+              path: 'dialog/:dialogId',
+              name: "dialogPage",
               pageBuilder: (context, state) => NoTransitionPage<void>(
                 key: state.pageKey,
-                child: DialogPage(),
+                child: DialogPage(
+                  state.params["dialogId"],
+                ),
               ),
               routes: [],
             ),

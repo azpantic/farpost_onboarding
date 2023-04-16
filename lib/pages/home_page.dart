@@ -61,7 +61,9 @@ class DialogStepper extends GetView<DialogStepperController> {
                 ElevatedButton(
                     onPressed: () {
                       ChatDialog.dialogIndex = details.currentStep;
-                      context.push('/home/dialog');
+                      context.goNamed("dialogPage",
+                          params: {"dialogId": details.currentStep.toString()});
+                      // context.push('/home/dialog', extra: {"dialogId": 1});
                     },
                     child: Text("Прочитать")),
                 ElevatedButton(onPressed: () {}, child: Text("Пройти тест")),

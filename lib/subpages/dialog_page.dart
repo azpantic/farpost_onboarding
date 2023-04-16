@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobile_application_template/controllers/dialog_controller.dart';
+import 'package:flutter_mobile_application_template/controllers/dialog_stepper_controller.dart';
 import 'package:flutter_mobile_application_template/models/dialog.dart';
 import 'package:flutter_mobile_application_template/widgets/dialog_page_widgets/message_widget.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class DialogPage extends GetView<DialogController> {
-  const DialogPage({super.key});
+  int? dialogIndex;
+
+  DialogPage(String? param, {super.key}) {
+    dialogIndex = int.parse(param ?? "0");
+  }
 
   @override
   Widget build(BuildContext context) {
+    // print(dialogIndex);
     return FutureBuilder<ChatDialog>(
       future: ChatDialog.getCurrentDialog(),
       builder: (context, AsyncSnapshot<ChatDialog> snapshot) {
@@ -34,6 +41,11 @@ class DialogPage extends GetView<DialogController> {
 
   Widget dialogPage(BuildContext context, ChatDialog dialog) {
     DialogController controller = DialogController(dialog);
+    controller.setActiveChat(dialogIndex!);
+    controller.onDialogEnd = (int chatIndex) {
+      var stepperController = Get.find<DialogStepperController>();
+      stepperController.seteDialogEnable(dialogIndex! + 1);
+    };
     return Scaffold(
       appBar: AppBar(
         title: Text(dialog.title),
@@ -61,12 +73,17 @@ class DialogPage extends GetView<DialogController> {
                 ),
               ),
             if (controller.dialogEnded.value)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(10.0),
-                child: Text(
-                  'Диалог окончен', // TODO: текст в i18n
-                  style: TextStyle(
-                      color: Colors.white38), //TODO: брать цвет из темы
+                child: ElevatedButton(
+                  onPressed: () => context.pop(),
+                  child: Text(
+                    'Завершить диалог', // TODO: текст в i18n
+                    style: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary), //TODO: брать цвет из темы
+                  ),
                 ),
               ),
           ],

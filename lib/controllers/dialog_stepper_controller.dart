@@ -13,6 +13,11 @@ class DialogStepperController extends GetxController {
         "Вы знаете почти все", "Вы полноценный сотрудник Farpost", false),
   ].obs;
 
+  void seteDialogEnable(int dialogIndex) {
+    if (dialogIndex < 0 || dialogIndex > allDialogData().length - 1) return;
+    allDialogData()[dialogIndex].isAvailable = true;
+  }
+
   bool isDialogStepAvalible(int dialogIndex) {
     if (dialogIndex < 0 || dialogIndex > allDialogData().length - 1)
       return false;
