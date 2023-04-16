@@ -4,12 +4,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobile_application_template/constants.dart';
 import 'package:get/get.dart';
 
+import 'controllers/dialog_stepper_controller.dart';
 import 'controllers/main_controller.dart';
 import 'i18n/strings.g.dart';
 import 'routes.dart';
 
 void main() {
   Get.put(MainController());
+  Get.put(DialogStepperController());
   WidgetsFlutterBinding.ensureInitialized();
   // settingsData!.lang == null
   //     ? LocaleSettings.useDeviceLocale()
@@ -36,26 +38,29 @@ class MyApp extends GetView<MainController> {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return Obx(() => MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          locale: TranslationProvider.of(context)
-              .flutterLocale, // use provideraQ  8
-          supportedLocales: AppLocaleUtils.supportedLocales,
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+    return Obx(
+      () => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        locale:
+            TranslationProvider.of(context).flutterLocale, // use provideraQ  8
+        supportedLocales: AppLocaleUtils.supportedLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
-          theme: ThemeData(
-            colorSchemeSeed: controller.colorSeed(),
-            useMaterial3: true,
-          ),
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            colorSchemeSeed: controller.colorSeed(),
-            useMaterial3: true,
-          ),
+        theme: ThemeData(
+          colorSchemeSeed: controller.colorSeed(),
+          useMaterial3: true,
+        ),
 
-          themeMode: controller.isDarkMode() ? ThemeMode.dark : ThemeMode.light,
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          colorSchemeSeed: controller.colorSeed(),
+          useMaterial3: true,
+        ),
 
-          routerConfig: router,
-        ));
+        themeMode: controller.isDarkMode() ? ThemeMode.dark : ThemeMode.light,
+
+        routerConfig: router,
+      ),
+    );
   }
 }

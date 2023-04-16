@@ -44,6 +44,7 @@ dependencies:
   flutter_adaptive_scaffold: ^0.1.2
   get_storage: ^2.1.1
   dynamic_color: ^1.6.3
+  fluttertoast: ^8.2.1
   
 
 dev_dependencies:

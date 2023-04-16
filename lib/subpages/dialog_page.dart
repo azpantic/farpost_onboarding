@@ -11,24 +11,25 @@ class DialogPage extends GetView<DialogController> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ChatDialog>(
-        future: ChatDialog.getCurrentDialog(),
-        builder: (context, AsyncSnapshot<ChatDialog> snapshot) {
-          if (snapshot.hasData) {
-            return dialogPage(context, snapshot.requireData);
-          } else if (snapshot.hasError) {
-            return Scaffold(
-                appBar: AppBar(
-                  title: const Text(
-                    'Error',
-                  ),
+      future: ChatDialog.getCurrentDialog(),
+      builder: (context, AsyncSnapshot<ChatDialog> snapshot) {
+        if (snapshot.hasData) {
+          return dialogPage(context, snapshot.requireData);
+        } else if (snapshot.hasError) {
+          return Scaffold(
+              appBar: AppBar(
+                title: const Text(
+                  'Error',
                 ),
-                body: Text(snapshot.error.toString()));
-          } else {
-            return const Scaffold(
-              body: Center(child: Text('')),
-            );
-          }
-        });
+              ),
+              body: Text(snapshot.error.toString()));
+        } else {
+          return const Scaffold(
+            body: Center(child: Text('')),
+          );
+        }
+      },
+    );
   }
 
   Widget dialogPage(BuildContext context, ChatDialog dialog) {

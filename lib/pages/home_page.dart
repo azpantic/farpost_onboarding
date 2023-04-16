@@ -5,6 +5,9 @@ import 'package:flutter_mobile_application_template/models/dialog_info.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../controllers/dialog_stepper_controller.dart';
 import '../models/dialog.dart';
 
 class HomePage extends GetView<void> {
@@ -20,82 +23,88 @@ class HomePage extends GetView<void> {
         child: Container(
           // height: context.mediaQueryShortestSide / 2,
           // color: context.theme.colorScheme.primary,
-          child: MyStatefulWidget(),
+          child: DialogStepper(),
         ),
       ),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _index = 0;
-
+class DialogStepper extends GetView<DialogStepperController> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<DialogInfoProvider>(
-      future: DialogInfoProvider.getDialogInfo(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return TitleStepper(context, snapshot.requireData);
-        } else if (snapshot.hasError) {
-          return Text(snapshot.error.toString());
-        } else {
-          return Text('');
-        }
-      },
-    );
+    return TitleStepper(context);
   }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return FutureBuilder<DialogInfoProvider>(
+  //     future: DialogInfoProvider.getDialogInfo(),
+  //     builder: (context, snapshot) {
+  //       if (snapshot.hasData)
+  //         return TitleStepper(context, snapshot.requireData);
 
-  Widget TitleStepper(
-      BuildContext context, DialogInfoProvider dialogInfoProvider) {
-    return Stepper(
-      controlsBuilder: ((context, details) {
-        return Padding(
-          padding: const EdgeInsets.all(appPadding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    ChatDialog.dialogIndex = details.currentStep;
-                    context.push('/home/dialog');
-                  },
-                  child: Text("Прочитать")),
-              ElevatedButton(onPressed: () {}, child: Text("Пройти тест")),
-            ],
-          ),
-        );
-      }),
-      currentStep: _index,
-      onStepTapped: (int index) {
-        setState(() {
-          _index = index;
-        });
-      },
-      steps: <Step>[
-        for (int i = 0; i < dialogInfoProvider.data.length; i++)
-          Step(
-            title: Container(
-              decoration: BoxDecoration(
-                color: Colors.lightGreen,
-                borderRadius: BorderRadius.circular(appRoundRadius),
+  //       if (snapshot.hasError) return Text(snapshot.error.toString());
+
+  //       return const Text('');
+  //     },
+  //   );
+
+  Widget TitleStepper(BuildContext context) {
+    return Obx(
+      () => Stepper(
+        controlsBuilder: ((context, details) {
+          return Padding(
+            padding: const EdgeInsets.all(appPadding),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      ChatDialog.dialogIndex = details.currentStep;
+                      context.push('/home/dialog');
+                    },
+                    child: Text("Прочитать")),
+                ElevatedButton(onPressed: () {}, child: Text("Пройти тест")),
+              ],
+            ),
+          );
+        }),
+        currentStep: controller.selectedDialogIndex(),
+        onStepTapped: (int dialogIndex) {
+          if (controller.isDialogStepAvalible(dialogIndex)) {
+            controller.selectedDialogIndex(dialogIndex);
+            return;
+          }
+
+          Fluttertoast.showToast(
+            msg: "This is a short message",
+            toastLength: Toast.LENGTH_SHORT,
+            textColor: Colors.black,
+            fontSize: 16,
+            backgroundColor: Colors.grey[200],
+          );
+        },
+        steps: controller.allDialogData
+            .map(
+              (dialogInfo) => Step(
+                title: Container(
+                  decoration: BoxDecoration(
+                    color: dialogInfo.isAvailable
+                        ? availableChatColor
+                        : unavailableChatColor,
+                    borderRadius: BorderRadius.circular(appRoundRadius),
+                  ),
+                  padding: EdgeInsets.all(appPadding),
+                  child: Text(dialogInfo.title),
+                ),
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(dialogInfo.subTitle),
+                ),
               ),
-              padding: EdgeInsets.all(appPadding),
-              child: Text(dialogInfoProvider.data[i].title),
-            ),
-            content: Container(
-              alignment: Alignment.centerLeft,
-              child: Text(dialogInfoProvider.data[i].subTitle),
-            ),
-          )
-      ],
+            )
+            .toList(),
+      ),
     );
   }
 }

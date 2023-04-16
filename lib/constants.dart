@@ -13,3 +13,6 @@ const List<Color> staticColorAccent = [
 ];
 
 const Color appColor = Colors.indigo;
+
+const Color availableChatColor = Colors.lightGreen;
+const Color unavailableChatColor = Colors.grey;

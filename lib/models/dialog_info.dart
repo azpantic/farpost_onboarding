@@ -32,19 +32,19 @@ class DialogInfo {
   String title;
   String subTitle;
 
-  DialogInfo(this.title, this.subTitle);
+  bool isAvailable;
+
+  DialogInfo(this.title, this.subTitle, this.isAvailable);
 
   factory DialogInfo.fromJson(Map<String, dynamic> json) {
     return DialogInfo(
       json['title'] ?? '',
       json['subtitle'] ?? '',
+      json['isAvailable'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'subtitle': subTitle,
-    };
+    return {'title': title, 'subtitle': subTitle, 'isAvailable': isAvailable};
   }
 }
