@@ -17,6 +17,11 @@ class ChatDialog {
     return dialog;
   }
 
+  static Future<ChatDialog> getDialog(int id) async {
+    dialogIndex = id;
+    return await getCurrentDialog();
+  }
+
   factory ChatDialog.fromJson(Map<String, dynamic> json) {
     return ChatDialog(
       title: json['title'] ?? '',
