@@ -12,8 +12,9 @@ class DialogController extends GetxController {
     ]),
   ];
 
-  void setActiveChat(int chatIndex) {
-    dialog = allChatData[chatIndex];
+  void setActiveChat(int chatIndex) async {
+    //dialog = allChatData[chatIndex];
+    dialog = await ChatDialog.getDialog(chatIndex);
     currentChatIndex = chatIndex;
   }
 
