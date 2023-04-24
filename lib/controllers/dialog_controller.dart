@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobile_application_template/models/dialog.dart';
 import 'package:get/get.dart';
 
 class DialogController extends GetxController {
-  DialogController(this.dialog) {
+  DialogController(this.dialog, this.scrollController) {
     receiveMessages();
   }
 
@@ -28,6 +29,7 @@ class DialogController extends GetxController {
   RxBool dialogEnded = false.obs;
 
   final delayMilliseconds = 500;
+  final ScrollController scrollController;
 
   Future<void> receiveMessages() async {
     showButton.value = false;

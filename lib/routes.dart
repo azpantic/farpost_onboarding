@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_application_template/models/dictionary_info.dart';
 import 'package:flutter_mobile_application_template/subpages/dialog_page.dart';
+import 'package:flutter_mobile_application_template/subpages/info_page.dart';
 import 'package:flutter_mobile_application_template/subpages/settings_subpage.dart';
 
 import 'package:get/get.dart';
@@ -102,6 +104,17 @@ final router = GoRouter(
               pageBuilder: (context, state) => MaterialPage<void>(
                 key: state.pageKey,
                 child: SettingsSubpage(),
+              ),
+              routes: [],
+            ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigationKey,
+              path: 'info',
+              pageBuilder: (context, state) => MaterialPage<void>(
+                key: state.pageKey,
+                child: InfoPage(
+                  info: DictionaryInfo.getCurrentInfo(),
+                ),
               ),
               routes: [],
             ),

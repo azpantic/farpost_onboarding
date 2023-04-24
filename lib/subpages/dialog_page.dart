@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/scheduler/binding.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobile_application_template/controllers/dialog_controller.dart';
 import 'package:flutter_mobile_application_template/controllers/dialog_stepper_controller.dart';
@@ -39,8 +40,15 @@ class DialogPage extends GetView<DialogController> {
     );
   }
 
+  final ScrollController scrollController = ScrollController();
+
+  void scrollToEnd() {
+    scrollController.animateTo(scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
+  }
+
   Widget dialogPage(BuildContext context, ChatDialog dialog) {
-    DialogController controller = DialogController(dialog);
+    DialogController controller = DialogController(dialog, scrollController);
     controller.setActiveChat(dialogIndex!);
     controller.onDialogEnd = (int chatIndex) {
       var stepperController = Get.find<DialogStepperController>();
@@ -60,6 +68,7 @@ class DialogPage extends GetView<DialogController> {
                 itemBuilder: (BuildContext context, int index) {
                   return MessageWidget(msg: dialog.messages[index]);
                 },
+                controller: scrollController,
               ),
             ),
             if (controller.messageIndex.value < dialog.messages.length &&
@@ -67,7 +76,9 @@ class DialogPage extends GetView<DialogController> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: ElevatedButton(
-                  onPressed: controller.nextMessage,
+                  onPressed: () {
+                    controller.nextMessage();
+                  },
                   child:
                       Text(dialog.messages[controller.messageIndex.value].text),
                 ),
@@ -78,11 +89,9 @@ class DialogPage extends GetView<DialogController> {
                 child: ElevatedButton(
                   onPressed: () => context.pop(),
                   child: Text(
-                    'Завершить диалог', // TODO: текст в i18n
-                    style: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary), //TODO: брать цвет из темы
+                    'Завершить диалог',
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
               ),
