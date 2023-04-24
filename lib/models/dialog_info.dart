@@ -40,7 +40,7 @@ class DialogInfo {
     return DialogInfo(
       json['title'] ?? '',
       json['subtitle'] ?? '',
-      json['isAvailable'] ?? '',
+      json['isAvailable'] ?? false,
     );
   }
 
