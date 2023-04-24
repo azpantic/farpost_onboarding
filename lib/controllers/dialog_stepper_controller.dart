@@ -1,16 +1,24 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
+import '../models/dialog.dart';
 import '../models/dialog_info.dart';
 
 class DialogStepperController extends GetxController {
   RxInt selectedDialogIndex = 0.obs;
 
   final allDialogData = [
-    DialogInfo("Добро пожаловать", "Сегодня вы познакомитесь с Farpost", true),
-    DialogInfo("Продолжайте изучать", "Вы уже знаете про Farpost", false),
-    DialogInfo(
-        "Вы знаете почти все", "Вы полноценный сотрудник Farpost", false),
+    DialogInfo("Где я? Знакомство с компанией", "", true),
+    DialogInfo("Приветствие", "", false),
+    DialogInfo("Отпуск", "", false),
+    DialogInfo("Зарплата", "", false),
+    DialogInfo("Отпуск", "", false),
+    DialogInfo("Отгулы", "", false),
+    DialogInfo("Больничный", "", false),
+    DialogInfo("Ресурсы для онлайн-обучения", "", false),
+    DialogInfo("Наши сервисы", "", false),
   ].obs;
 
   void seteDialogEnable(int dialogIndex) {

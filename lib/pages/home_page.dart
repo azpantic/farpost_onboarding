@@ -99,10 +99,12 @@ class DialogStepper extends GetView<DialogStepperController> {
                   padding: EdgeInsets.all(appPadding),
                   child: Text(dialogInfo.title),
                 ),
-                content: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(dialogInfo.subTitle),
-                ),
+                content: dialogInfo.subTitle != ''
+                    ? Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(dialogInfo.subTitle),
+                      )
+                    : SizedBox(height: 1),
               ),
             )
             .toList(),
