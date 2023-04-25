@@ -37,6 +37,8 @@ class DialogController extends GetxController {
         !dialog.messages[messageIndex.value].isMine) {
       await Future.delayed(Duration(milliseconds: delayMilliseconds));
       messageIndex.value++;
+      await Future.delayed(Duration(milliseconds: 5));
+      scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 100), curve: Curves.easeInOut);
     }
 
     if (messageIndex.value < dialog.messages.length) {
@@ -45,10 +47,16 @@ class DialogController extends GetxController {
       dialogEnded.value = true;
       onDialogEnd(currentChatIndex);
     }
+
+    await Future.delayed(Duration(milliseconds: 10));
+    scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 100), curve: Curves.easeInOut);
   }
 
   Future<void> nextMessage() async {
     messageIndex.value++;
+    showButton.value = false;
+    await Future.delayed(Duration(milliseconds: 10));
+    scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 100), curve: Curves.easeInOut);
     receiveMessages();
   }
 }

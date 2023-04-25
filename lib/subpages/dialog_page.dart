@@ -63,24 +63,30 @@ class DialogPage extends GetView<DialogController> {
         () => Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                itemCount: controller.messageIndex.value,
-                itemBuilder: (BuildContext context, int index) {
-                  return MessageWidget(msg: dialog.messages[index]);
-                },
-                controller: scrollController,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: ListView.builder(
+                  itemCount: controller.messageIndex.value,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MessageWidget(msg: dialog.messages[index]);
+                  },
+                  controller: scrollController,
+                ),
               ),
             ),
             if (controller.messageIndex.value < dialog.messages.length &&
                 controller.showButton.value)
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
                 child: ElevatedButton(
                   onPressed: () {
                     controller.nextMessage();
                   },
                   child:
-                      Text(dialog.messages[controller.messageIndex.value].text),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(dialog.messages[controller.messageIndex.value].text),
+                      ),
                 ),
               ),
             if (controller.dialogEnded.value)
