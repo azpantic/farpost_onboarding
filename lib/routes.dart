@@ -39,14 +39,14 @@ final router = GoRouter(
                   label: t.navbar.homepage,
                 ),
                 NavigationDestination(
-                  selectedIcon: const Icon(Icons.library_books),
-                  icon: const Icon(Icons.library_books_outlined),
-                  label: t.navbar.castompage,
+                  selectedIcon: const Icon(Icons.bar_chart),
+                  icon: const Icon(Icons.bar_chart_outlined),
+                  label: /*t.navbar.castompage*/'Статистика'//TODO: вернуть локализацию,
                 ),
                 NavigationDestination(
-                  selectedIcon: const Icon(Icons.person_2),
-                  icon: const Icon(Icons.person_2_outlined),
-                  label: t.navbar.profile,
+                  selectedIcon: const Icon(Icons.library_books),
+                  icon: const Icon(Icons.library_books_outlined),
+                  label: /*t.navbar.profile*/'Справочник' //TODO: вернуть локализацию,
                 )
               ],
               // Используем context.go для перехода к нужному маршруту при нажатии на вкладку

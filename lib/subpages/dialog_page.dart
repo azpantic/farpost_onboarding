@@ -82,10 +82,13 @@ class DialogPage extends GetView<DialogController> {
                   onPressed: () {
                     controller.nextMessage();
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepOrangeAccent,
+                  ),
                   child:
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(dialog.messages[controller.messageIndex.value].text),
+                        child: Text(dialog.messages[controller.messageIndex.value].text, style: TextStyle(color: Colors.white),),
                       ),
                 ),
               ),
@@ -94,10 +97,13 @@ class DialogPage extends GetView<DialogController> {
                 padding: EdgeInsets.all(10.0),
                 child: ElevatedButton(
                   onPressed: () => context.pop(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepOrangeAccent,
+                  ),
                   child: Text(
                     'Завершить диалог',
                     style:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                        TextStyle(color: Colors.white),
                   ),
                 ),
               ),

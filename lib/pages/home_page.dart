@@ -59,14 +59,29 @@ class DialogStepper extends GetView<DialogStepperController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                    onPressed: () {
-                      ChatDialog.dialogIndex = details.currentStep;
-                      context.goNamed("dialogPage",
-                          params: {"dialogId": details.currentStep.toString()});
-                      // context.push('/home/dialog', extra: {"dialogId": 1});
-                    },
-                    child: Text("Прочитать")),
-                ElevatedButton(onPressed: () {}, child: Text("Пройти тест")),
+                  onPressed: () {
+                    ChatDialog.dialogIndex = details.currentStep;
+                    context.goNamed("dialogPage",
+                        params: {"dialogId": details.currentStep.toString()});
+                    // context.push('/home/dialog', extra: {"dialogId": 1});
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepOrangeAccent,
+                  ),
+                  child: const Text(
+                    "Прочитать",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepOrangeAccent,
+                    ),
+                    child: const Text(
+                      "Пройти тест",
+                      style: TextStyle(color: Colors.white),
+                    )),
               ],
             ),
           );
@@ -79,7 +94,7 @@ class DialogStepper extends GetView<DialogStepperController> {
           }
 
           Fluttertoast.showToast(
-            msg: "This is a short message",
+            msg: "Этот диалог пока недоступен",
             toastLength: Toast.LENGTH_SHORT,
             textColor: Colors.black,
             fontSize: 16,
@@ -89,6 +104,7 @@ class DialogStepper extends GetView<DialogStepperController> {
         steps: controller.allDialogData
             .map(
               (dialogInfo) => Step(
+                isActive: dialogInfo.isAvailable,
                 title: Container(
                   decoration: BoxDecoration(
                     color: dialogInfo.isAvailable
@@ -97,7 +113,7 @@ class DialogStepper extends GetView<DialogStepperController> {
                     borderRadius: BorderRadius.circular(appRoundRadius),
                   ),
                   padding: EdgeInsets.all(appPadding),
-                  child: Text(dialogInfo.title),
+                  child: Text(dialogInfo.title, style: TextStyle(color: Colors.white),),
                 ),
                 content: dialogInfo.subTitle != ''
                     ? Container(

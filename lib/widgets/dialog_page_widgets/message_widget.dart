@@ -4,7 +4,7 @@ import '../../models/dialog.dart';
 class MessageWidget extends StatelessWidget {
   // TODO: ипользовать цвета из темы
   final Color myMessageColor = Colors.deepOrange;
-  final Color otherMessageColor = Colors.white60;
+  final Color otherMessageColor = Colors.black12;
 
   final Color myTextColor = Colors.white;
   final Color otherTextColor = Colors.black;

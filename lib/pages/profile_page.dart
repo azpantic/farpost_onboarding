@@ -16,13 +16,13 @@ class ProfilePage extends GetView<void> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(t.navbar.profile),
-            IconButton(
+            Text(/*t.navbar.profile*/'Справочник'), //TODO: вернуть локализацию
+            /*IconButton(
               onPressed: () {
                 context.push("/profile/settings");
               },
               icon: const Icon(Icons.settings),
-            ),
+            ),*/
           ],
         ),
       ),
