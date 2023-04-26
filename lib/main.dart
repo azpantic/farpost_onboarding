@@ -40,6 +40,7 @@ class MyApp extends GetView<MainController> {
   Widget build(BuildContext context) {
     return Obx(
       () => MaterialApp.router(
+        title: 'Farpost адаптация',
         debugShowCheckedModeBanner: false,
         locale:
             TranslationProvider.of(context).flutterLocale, // use provideraQ  8

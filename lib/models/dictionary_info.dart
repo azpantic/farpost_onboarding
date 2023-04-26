@@ -22,6 +22,19 @@ class DictionaryInfo {
     currentInfo = info;
   }
 
+  static Future<DictionaryInfo> fromFile(String filePath) async {
+    String json = await rootBundle.loadString(filePath);
+    DictionaryInfo info = DictionaryInfo('', '');
+    try {
+      Map<String, dynamic> dialogJsonMap = jsonDecode(json);
+      info = DictionaryInfo.fromJson(dialogJsonMap);
+    } catch (e) {
+      developer.log('Error at "$filePath": ${e.toString()}');
+      info = DictionaryInfo('Ошибка', 'Невозможжно открыть');
+    }
+    return info;
+  }
+
   static Future<List<DictionaryInfo>> getInfo() async {
     List<DictionaryInfo> list = <DictionaryInfo>[];
 

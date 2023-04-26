@@ -19,7 +19,13 @@ class DialogStepperController extends GetxController {
     DialogInfo("Больничный", "", false),
     DialogInfo("Ресурсы для онлайн-обучения", "", false),
     DialogInfo("Наши сервисы", "", false),
+    DialogInfo("Задание 1", "Задание на тимбилдинг", false),
+    DialogInfo("Задание 2", "Задание на тимбилдинг", false),
+    DialogInfo("Задание 3", "Задание на тимбилдинг", false),
+    DialogInfo("Задание 4", "Задание на тимбилдинг", false),
   ].obs;
+
+  final int dialogAmount = 9;
 
   void seteDialogEnable(int dialogIndex) {
     if (dialogIndex < 0 || dialogIndex > allDialogData().length - 1) return;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobile_application_template/constants.dart';
 import 'package:flutter_mobile_application_template/i18n/strings.g.dart';
 import 'package:flutter_mobile_application_template/models/dialog_info.dart';
+import 'package:flutter_mobile_application_template/models/dictionary_info.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,13 +51,11 @@ class DialogStepper extends GetView<DialogStepperController> {
   //     },
   //   );
 
-
   final urls = [
     'https://forms.gle/w3YLVUqNYqidBHXZ9',
     'https://forms.gle/ikTWMe8AJ8UFtGJq8',
     'https://forms.gle/T8XCNARxtS9YMQ55A',
     'https://forms.gle/NFrx3GhmBvnLUaHCA',
-    'https://forms.gle/mPd1ZVUsvfLdx8JY8',
     'https://forms.gle/mPd1ZVUsvfLdx8JY8',
     'https://forms.gle/tpHySMFef74MD6Dn6',
     'https://forms.gle/1ktwUZ27eJnL7W9P9',
@@ -81,11 +80,21 @@ class DialogStepper extends GetView<DialogStepperController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    ChatDialog.dialogIndex = details.currentStep;
-                    context.goNamed("dialogPage",
-                        params: {"dialogId": details.currentStep.toString()});
-                    // context.push('/home/dialog', extra: {"dialogId": 1});
+                  onPressed: () async {
+                    if (details.currentStep < controller.dialogAmount) {
+                      ChatDialog.dialogIndex = details.currentStep;
+                      context.goNamed("dialogPage",
+                          params: {"dialogId": details.currentStep.toString()});
+                      // context.push('/home/dialog', extra: {"dialogId": 1});
+                    } else {
+                      int fileId =
+                          details.currentStep - controller.dialogAmount;
+                      DictionaryInfo info = await DictionaryInfo.fromFile(
+                          'assets/tasks/$fileId.json');
+                      DictionaryInfo.setCurrentInfo(info);
+                      controller.seteDialogEnable(details.currentStep + 1);
+                      context.push('/profile/info');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepOrangeAccent,
@@ -95,7 +104,8 @@ class DialogStepper extends GetView<DialogStepperController> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                ElevatedButton(
+                if (details.currentStep < urls.length)
+                  ElevatedButton(
                     onPressed: () {
                       openUrl(urls[details.currentStep]);
                     },
@@ -105,7 +115,8 @@ class DialogStepper extends GetView<DialogStepperController> {
                     child: const Text(
                       "Пройти тест",
                       style: TextStyle(color: Colors.white),
-                    )),
+                    ),
+                  ),
               ],
             ),
           );
@@ -118,7 +129,7 @@ class DialogStepper extends GetView<DialogStepperController> {
           }
 
           Fluttertoast.showToast(
-            msg: "Этот диалог пока недоступен",
+            msg: "Пока недоступно",
             toastLength: Toast.LENGTH_SHORT,
             textColor: Colors.black,
             fontSize: 16,
