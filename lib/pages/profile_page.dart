@@ -16,7 +16,7 @@ class ProfilePage extends GetView<void> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(/*t.navbar.profile*/'Справочник'), //TODO: вернуть локализацию
+            Text(/*t.navbar.profile*/ 'Справочник'), //TODO: вернуть локализацию
             /*IconButton(
               onPressed: () {
                 context.push("/profile/settings");
@@ -35,7 +35,9 @@ class ProfilePage extends GetView<void> {
           if (snapshot.hasData) {
             return InfoList(snapshot.requireData);
           }
-          return const CircularProgressIndicator();
+          return Center(
+            child: const CircularProgressIndicator(),
+          );
         },
       ),
     );
@@ -57,13 +59,19 @@ class ProfilePage extends GetView<void> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(list[index].title),
+                  Text(
+                    list[index].title,
+                    style: TextStyle(color: Colors.white),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       DictionaryInfo.setCurrentInfo(list[index]);
                       context.push('/profile/info');
                     },
-                    child: const Text('Открыть'),
+                    child: const Text(
+                      'Открыть',
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ],
               ),

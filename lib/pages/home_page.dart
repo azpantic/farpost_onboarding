@@ -6,12 +6,13 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/dialog_stepper_controller.dart';
 import '../models/dialog.dart';
 
 class HomePage extends GetView<void> {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,27 @@ class DialogStepper extends GetView<DialogStepperController> {
   //     },
   //   );
 
+
+  final urls = [
+    'https://forms.gle/w3YLVUqNYqidBHXZ9',
+    'https://forms.gle/ikTWMe8AJ8UFtGJq8',
+    'https://forms.gle/T8XCNARxtS9YMQ55A',
+    'https://forms.gle/NFrx3GhmBvnLUaHCA',
+    'https://forms.gle/mPd1ZVUsvfLdx8JY8',
+    'https://forms.gle/mPd1ZVUsvfLdx8JY8',
+    'https://forms.gle/tpHySMFef74MD6Dn6',
+    'https://forms.gle/1ktwUZ27eJnL7W9P9',
+    'https://forms.gle/y7EhR6whGNSbdRx2A',
+    'https://forms.gle/zwyzS34XPBbzhjgh8'
+  ];
+
+  Future<void> openUrl(String url) async {
+    await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    );
+  }
+
   Widget TitleStepper(BuildContext context) {
     return Obx(
       () => Stepper(
@@ -74,7 +96,9 @@ class DialogStepper extends GetView<DialogStepperController> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      openUrl(urls[details.currentStep]);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepOrangeAccent,
                     ),
@@ -113,7 +137,10 @@ class DialogStepper extends GetView<DialogStepperController> {
                     borderRadius: BorderRadius.circular(appRoundRadius),
                   ),
                   padding: EdgeInsets.all(appPadding),
-                  child: Text(dialogInfo.title, style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    dialogInfo.title,
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
                 content: dialogInfo.subTitle != ''
                     ? Container(
