@@ -24,12 +24,22 @@ class CastomPage extends GetView<StateController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Center(
-                        child: Text(
-                          'Как вы оцениваете сегодняшний день?',
-                          style: TextStyle(fontSize: 20),
+                        child: Column(
+                          children: const [
+                            Text(
+                              'Ежедневный опрос',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 14),
+                            ),
+                            Text(
+                              'Как вы оцениваете сегодняшний рабочий день?',
+                              style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
                     ),

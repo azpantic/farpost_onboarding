@@ -59,9 +59,12 @@ class ProfilePage extends GetView<void> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    list[index].title,
-                    style: TextStyle(color: Colors.white),
+                  Flexible(
+                    child: Text(
+                      list[index].title,
+                      style: TextStyle(color: Colors.white),
+                      maxLines: 2,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
