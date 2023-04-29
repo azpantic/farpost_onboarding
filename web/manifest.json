@@ -1,11 +1,11 @@
 {
-    "name": "farpost_onboarding",
-    "short_name": "farpost_onboarding",
+    "name": "Farpost адаптация",
+    "short_name": "Адаптация",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Помощь в адаптации farpost",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
