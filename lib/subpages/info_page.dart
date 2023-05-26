@@ -14,11 +14,14 @@ class InfoPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 30),
-            child: Text(info.content),
-          ),
+        child: ListView(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 30),
+              child: Text(info.content),
+            ),
+          ],
         ),
       ),
     );
